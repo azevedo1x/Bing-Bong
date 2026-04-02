@@ -37,7 +37,6 @@ class CharacterPage extends ConsumerWidget {
               children: [
                 const SizedBox(height: 24),
 
-                // Título
                 Text(
                   'BING BONG',
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -49,7 +48,6 @@ class CharacterPage extends ConsumerWidget {
 
                 const Spacer(),
 
-                // Fala ou "tap me" — acima do personagem
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: SizedBox(
@@ -92,7 +90,6 @@ class CharacterPage extends ConsumerWidget {
 
                 const SizedBox(height: 16),
 
-                // Personagem
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 400),
                   curve: Curves.easeInOut,
@@ -126,7 +123,6 @@ class CharacterPage extends ConsumerWidget {
   }
 }
 
-/// "tap me" com pulso suave de opacidade para convidar interação.
 class _PulsingTapMe extends StatefulWidget {
   const _PulsingTapMe();
 
