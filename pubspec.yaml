@@ -11,7 +11,6 @@ dependencies:
     sdk: flutter
   audioplayers: ^6.1.0
   flutter_riverpod: ^2.6.1
-  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:
@@ -21,12 +20,16 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: true
-  image_path: "assets/images/bing_bong.png"
+  image_path: "assets/images/icon.png"
   adaptive_icon_background: "#1A0A2E"
-  adaptive_icon_foreground: "assets/images/bing_bong.png"
+  adaptive_icon_foreground: "assets/images/icon.png"
 
 flutter:
   uses-material-design: true
   assets:
     - assets/audio/
     - assets/images/
+  fonts:
+    - family: DarumadropOne
+      fonts:
+        - asset: assets/fonts/DarumadropOne-Regular.ttf
