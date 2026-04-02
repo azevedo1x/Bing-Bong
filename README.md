@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://peak.wiki.gg/images/thumb/e/e1/Bing_Bong.png/200px-Bing_Bong.png" alt="Bing Bong" width="180"/>
+  <img src="assets/readme/200px-Bing_Bong.png" alt="Bing Bong" width="180"/>
 </p>
 
 <h1 align="center">Bing Bong</h1>
@@ -17,42 +17,42 @@
 
 ---
 
-A **Magic 8-Ball** style app inspired by the beloved green plushie from [**PEAK**](https://store.steampowered.com/app/3527290/PEAK/) — the co-op climbing game by [Aggro Crab](https://aggrocrab.com/) & [Landfall](https://landfall.se/peak).
+A **Magic 8-Ball** style app inspired by the beloved green plushie from [**PEAK**](https://store.steampowered.com/app/3527290/PEAK/), the co-op climbing game by [Aggro Crab](https://aggrocrab.com/) & [Landfall](https://landfall.se/peak).
 
-Tap Bing Bong, hear a random voice line, and let the oracle of BingBong Airways guide your life decisions. Just like in the game — except you don't have to carry him up an entire mountain.
+Tap Bing Bong, hear a random voice line, and let the oracle of BingBong Airways guide your life decisions. Just like in the game, except you don't have to carry him up an entire mountain.
 
 <p align="center">
-  <img src="https://peak.wiki.gg/images/1/15/Steam_Wallpaper_09_-_Bing_Bong.jpg" alt="Bing Bong in PEAK" width="600"/>
+  <img src="assets/readme/Steam_Wallpaper_09_-_Bing_Bong.jpg" alt="Bing Bong in PEAK" width="600"/>
   <br/>
-  <sub>Bing Bong on the island — from the <a href="https://peak.wiki.gg/wiki/Bing_Bong">PEAK Wiki</a></sub>
+  <sub>Bing Bong on the island, from the <a href="https://peak.wiki.gg/wiki/Bing_Bong">PEAK Wiki</a></sub>
 </p>
 
 ## Who is Bing Bong?
 
-In **PEAK**, Bing Bong is the stuffed plushie mascot of **BingBong Airlines** — the airline that crashes you onto a mysterious island. You can find him at the crash site on the Shore and squeeze him to hear a random voice line: a positive, negative, uncertain, or hilariously irrelevant response to whatever question you had in mind.
+In **PEAK**, Bing Bong is the stuffed plushie mascot of **BingBong Airlines**, the airline that crashes you onto a mysterious island. You can find him at the crash site on the Shore and squeeze him to hear a random voice line: a positive, negative, uncertain, or hilariously irrelevant response to whatever question you had in mind.
 
 He weighs 5 points in your inventory. He gives you nothing useful. Players carry him to the summit anyway.
 
 > *"Do not cast Bing Bong aside, it will remember."*
 
-For a brief time after PEAK's launch, the developers at Aggro Crab could actually **possess Bing Bong** and talk to players through him in real-time — jump-scaring climbers across the island. That feature was removed, but the legend remains.
+For a brief time after PEAK's launch, the developers at Aggro Crab could actually **possess Bing Bong** and talk to players through him in real-time, jump-scaring climbers across the island. That feature was removed, but the legend remains.
 
 <p align="center">
-  <img src="https://peak.wiki.gg/images/d/dd/Bing_Bong_Airlines.png" alt="BingBong Airlines" width="280"/>
+  <img src="assets/readme/Bing_Bong_Airlines.png" alt="BingBong Airlines" width="280"/>
   <br/>
-  <sub>BingBong Airlines — the worst airline, the best mascot</sub>
+  <sub>BingBong Airlines, the worst airline, the best mascot</sub>
 </p>
 
 ## Features
 
-- **26 authentic voice lines** — all the classic Bing Bong responses, from *"yeah definitely"* to *"im not comfortable answering that"*
-- **Shuffle-bag randomization** — every voice line plays before any repeats, never the same line twice in a row
-- **Tap-to-squeeze interaction** — haptic feedback + elastic bounce animation, just like squeezing the real plush
-- **Live quote display** — see what Bing Bong is saying in real-time, lime green text with that Peak aesthetic
-- **Idle floating animation** — Bing Bong gently hovers, waiting to be consulted
-- **Lime green halo glow** — radiates wisdom when speaking
-- **Blurred island background** — atmospheric game-scene backdrop
-- **Immersive fullscreen** — no distractions, just you and the oracle
+- **26 authentic voice lines**: all the classic Bing Bong responses, from *"yeah definitely"* to *"im not comfortable answering that"*
+- **Shuffle-bag randomization**: every voice line plays before any repeats, never the same line twice in a row
+- **Tap-to-squeeze interaction**: haptic feedback + elastic bounce animation, just like squeezing the real plush
+- **Live quote display**: see what Bing Bong is saying in real-time, lime green text with that Peak aesthetic
+- **Idle floating animation**: Bing Bong gently hovers, waiting to be consulted
+- **Lime green halo glow**: radiates wisdom when speaking
+- **Blurred island background**: atmospheric game-scene backdrop
+- **Immersive fullscreen**: no distractions, just you and the oracle
 
 ## Tech Stack
 
@@ -61,7 +61,7 @@ For a brief time after PEAK's launch, the developers at Aggro Crab could actuall
 | Framework | Flutter 3.41.6 / Dart 3.11.4 |
 | State Management | flutter_riverpod (StateNotifier) |
 | Audio | audioplayers 6.x (local asset playback) |
-| Typography | Google Fonts — Daruma Drop One |
+| Typography | Local font asset Daruma Drop One |
 | Architecture | Feature-based Clean Architecture Lite |
 
 ## Architecture
@@ -131,7 +131,7 @@ All 26 responses, extracted straight from BingBong Airlines' finest:
 
 **PEAK** is a co-op climbing game where the slightest mistake can spell your doom. Solo or as a group of up to four lost nature scouts, your only hope of rescue from a mysterious island is to scale the mountain at its center. The terrain changes every 24 hours. Over **11 million copies sold** on Steam with **Overwhelmingly Positive** reviews (95%).
 
-Developed by **Team PEAK** — a collaboration between [Aggro Crab](https://aggrocrab.com/) (*Another Crab's Treasure*) and [Landfall](https://landfall.se/) (*Content Warning*).
+Developed by **Team PEAK**, a collaboration between [Aggro Crab](https://aggrocrab.com/) (*Another Crab's Treasure*) and [Landfall](https://landfall.se/) (*Content Warning*).
 
 ---
 
