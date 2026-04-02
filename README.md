@@ -125,7 +125,6 @@ All 26 responses, extracted straight from BingBong Airlines' finest:
 
 <p align="center">
   <a href="https://store.steampowered.com/app/3527290/PEAK/">
-    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3527290/header.jpg" alt="PEAK on Steam" width="460"/>
   </a>
 </p>
 
