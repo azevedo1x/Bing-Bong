@@ -17,24 +17,23 @@ class AudioService {
     });
   }
 
-  /// Toca a próxima voice line e retorna a frase extraída do nome do arquivo.
-  Future<String> playNext() async {
-    if (_isPlaying) {
-      await _player.stop();
-    }
-    final path = _randomizer.next();
+  Future<String> playNext() => _play(_randomizer.next());
+
+  Future<String> playSpecific(String path) => _play(path);
+
+  Future<String> _play(String path) async {
+    if (_isPlaying) await _player.stop();
     await _player.play(AssetSource(path));
     _isPlaying = true;
     return _extractQuote(path);
   }
 
-  /// Extrai a frase do nome do arquivo: "audio/im bing bong.mp3" → "im bing bong"
   String _extractQuote(String path) {
-    return path
-        .split('/')
-        .last
-        .replaceAll('.mp3', '')
-        .replaceAll('_', "'");
+    var quote = path.split('/').last.replaceAll('.mp3', '');
+    if (quote.endsWith('_')) {
+      quote = '${quote.substring(0, quote.length - 1)}?';
+    }
+    return quote.replaceAll('_', "'");
   }
 
   Future<void> dispose() async {

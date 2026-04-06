@@ -25,6 +25,15 @@ class CharacterNotifier extends StateNotifier<CharacterState> {
     }
   }
 
+  Future<void> playSpecific(String path) async {
+    try {
+      final quote = await _audioService.playSpecific(path);
+      state = CharacterState(isTalking: true, quote: quote);
+    } catch (_) {
+      state = CharacterState.idle;
+    }
+  }
+
   @override
   void dispose() {
     _audioService.dispose();

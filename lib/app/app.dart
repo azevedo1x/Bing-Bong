@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../features/character/presentation/character_page.dart';
+import '../features/splash/presentation/splash_page.dart';
 import 'app_theme.dart';
 
 class BingBongApp extends StatelessWidget {
@@ -13,7 +13,7 @@ class BingBongApp extends StatelessWidget {
         title: 'Bing Bong',
         debugShowCheckedModeBanner: false,
         theme: buildAppTheme(),
-        home: const CharacterPage(),
+        home: const SplashPage(),
       ),
     );
   }

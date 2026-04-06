@@ -1,11 +1,8 @@
 import 'dart:math';
 
-/// Shuffle-bag: garante que todas as voice lines sejam ouvidas antes de
-/// qualquer repetição, e nunca toca a mesma linha duas vezes seguidas.
 class AudioRandomizer {
   final List<String> _source;
   final Random _random;
-
   final List<String> _pool = [];
   String? _lastPlayed;
 
@@ -17,8 +14,6 @@ class AudioRandomizer {
       _pool.addAll(_source);
       _shuffle(_pool);
 
-      // Se o primeiro item do novo ciclo for igual ao último tocado,
-      // troca com o segundo para evitar repetição na virada do ciclo.
       if (_pool.length > 1 && _pool.first == _lastPlayed) {
         final tmp = _pool[0];
         _pool[0] = _pool[1];
