@@ -48,10 +48,13 @@ For a brief time after PEAK's launch, the developers at Aggro Crab could actuall
 - **26 authentic voice lines**: all the classic Bing Bong responses, from *"yeah definitely"* to *"im not comfortable answering that"*
 - **Shuffle-bag randomization**: every voice line plays before any repeats, never the same line twice in a row
 - **Tap-to-squeeze interaction**: haptic feedback + elastic bounce animation, just like squeezing the real plush
-- **Live quote display**: see what Bing Bong is saying in real-time, lime green text with that Peak aesthetic
+- **"I'm Bing Bong" button**: dedicated button to hear his iconic catchphrase anytime
+- **Live quote display**: see what Bing Bong is saying in real-time with glassmorphism quote card
+- **Peak-inspired theme**: deep purple palette, coral & cyan accents, glass-style UI elements
 - **Idle floating animation**: Bing Bong gently hovers, waiting to be consulted
-- **Lime green halo glow**: radiates wisdom when speaking
+- **Dual-tone halo glow**: lime green + cyan aura radiates wisdom when speaking
 - **Blurred island background**: atmospheric game-scene backdrop
+- **About sheet**: bottom sheet with app info and link to the developer's GitHub
 - **Immersive fullscreen**: no distractions, just you and the oracle
 
 ## Tech Stack
@@ -61,38 +64,49 @@ For a brief time after PEAK's launch, the developers at Aggro Crab could actuall
 | Framework | Flutter 3.41.6 / Dart 3.11.4 |
 | State Management | flutter_riverpod (StateNotifier) |
 | Audio | audioplayers 6.x (local asset playback) |
+| Links | url_launcher (external GitHub link) |
 | Typography | Local font asset Daruma Drop One |
-| Architecture | Feature-based Clean Architecture Lite |
+| Architecture | Feature-based Clean Architecture |
 
 ## Architecture
 
 ```
 lib/
-├── main.dart                              # Portrait lock + immersive mode
+├── main.dart                                  # Portrait lock + immersive mode
 ├── app/
-│   ├── app.dart                           # ProviderScope + MaterialApp
-│   └── app_theme.dart                     # M3 dark theme + Daruma Drop One
-├── core/constants/
-│   └── audio_constants.dart               # 26 voice line paths
+│   ├── app.dart                               # ProviderScope + MaterialApp
+│   └── app_theme.dart                         # M3 dark theme + Daruma Drop One
+├── core/
+│   ├── constants/
+│   │   └── audio_constants.dart               # 26 voice line paths
+│   └── theme/
+│       └── peak_colors.dart                   # Peak-inspired color palette + text shadows
 ├── features/character/
 │   ├── logic/
-│   │   ├── character_state.dart           # { isTalking, quote }
-│   │   └── character_notifier.dart        # Audio ↔ UI state bridge
+│   │   ├── character_state.dart               # { isTalking, quote }
+│   │   └── character_notifier.dart            # Audio ↔ UI state bridge
 │   └── presentation/
-│       ├── character_page.dart            # Main screen composition
-│       └── widgets/bing_bong_widget.dart  # Animated character + tap handler
+│       ├── character_page.dart                # Main screen composition
+│       └── widgets/
+│           ├── about_sheet.dart               # About bottom sheet + GitHub link
+│           ├── background.dart                # Blurred island backdrop
+│           ├── bing_bong_widget.dart          # Animated character + tap handler
+│           ├── glass_icon_button.dart         # Glass-style icon button
+│           ├── glass_quote_card.dart          # Glassmorphism quote card
+│           ├── im_bing_bong_button.dart       # Dedicated "i'm bing bong" button
+│           └── pulsing_tap_me.dart            # Pulsing idle text
 └── services/
-    ├── audio_service.dart                 # AudioPlayer wrapper
-    └── audio_randomizer.dart              # Shuffle-bag algorithm
+    ├── audio_service.dart                     # AudioPlayer wrapper
+    └── audio_randomizer.dart                  # Shuffle-bag algorithm
 ```
 
-**Data flow:** Tap → `BingBongWidget` → `CharacterNotifier.onTap()` → `AudioService.playNext()` → `AudioRandomizer.next()` → plays mp3 + extracts quote from filename → state updates → UI rebuilds with quote text + halo glow → `onPlayerComplete` → back to idle.
+**Data flow:** Tap → `BingBongWidget` → `CharacterNotifier.onTap()` → `AudioService.playNext()` → `AudioRandomizer.next()` → plays mp3 + extracts quote from filename → state updates → UI rebuilds with quote text + halo glow → `onPlayerComplete` → back to idle. The "i'm bing bong" button follows the same flow via `playSpecific()`, bypassing the randomizer.
 
 ## Getting Started
 
 ```bash
 # Clone
-git clone https://github.com/your-username/bingbong.git
+git clone https://github.com/azevedo1x/bingbong.git
 cd bingbong
 
 # Install dependencies
