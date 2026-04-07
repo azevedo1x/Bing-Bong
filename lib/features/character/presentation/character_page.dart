@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/theme/peak_colors.dart';
 import '../logic/character_notifier.dart';
 import '../logic/character_state.dart';
+import 'widgets/about_button.dart';
 import 'widgets/about_sheet.dart';
 import 'widgets/background.dart';
 import 'widgets/bing_bong_widget.dart';
@@ -58,33 +59,11 @@ class CharacterPage extends ConsumerWidget {
               .playSpecific('audio/im bing bong.mp3'),
         ),
         const SizedBox(width: 16),
-        GestureDetector(
+        AboutButton(
           onTap: () => showModalBottomSheet(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (_) => const AboutSheet(),
-          ),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: Colors.black, width: 2.5),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 0,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                'assets/images/about_icon.jpg',
-                width: 52,
-                height: 52,
-                fit: BoxFit.cover,
-              ),
-            ),
           ),
         ),
       ],
