@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ImBingBongButton extends StatefulWidget {
+class AboutButton extends StatefulWidget {
   final VoidCallback onTap;
-  const ImBingBongButton({super.key, required this.onTap});
+  const AboutButton({super.key, required this.onTap});
 
   @override
-  State<ImBingBongButton> createState() => _ImBingBongButtonState();
+  State<AboutButton> createState() => _AboutButtonState();
 }
 
-class _ImBingBongButtonState extends State<ImBingBongButton> {
+class _AboutButtonState extends State<AboutButton> {
   bool _pressed = false;
 
   @override
@@ -27,13 +27,17 @@ class _ImBingBongButtonState extends State<ImBingBongButton> {
             borderRadius: BorderRadius.circular(14),
             border: Border.all(color: Colors.black, width: 2.5),
             boxShadow: const [
-              BoxShadow(color: Colors.black38, blurRadius: 0, offset: Offset(3, 3)),
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 0,
+                offset: Offset(3, 3),
+              ),
             ],
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(
-              'assets/images/im-bing-bong-button-img.jpg',
+              'assets/images/about_icon.jpg',
               width: 52,
               height: 52,
               fit: BoxFit.cover,
