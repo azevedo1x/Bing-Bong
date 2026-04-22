@@ -1,3 +1,5 @@
+#noinspection ShrinkerUnresolvedReference
+
 # ============================================================
 # Flutter — manter apenas o que é acessado via JNI/reflection
 # ============================================================
