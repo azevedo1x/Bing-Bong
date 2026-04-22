@@ -46,3 +46,13 @@ app.*.map.json
 
 # Claude related
 CLAUDE.md
+
+# Android signing secrets
+**/key.properties
+**/*.keystore
+**/*.jks
+/android/app/upload-keystore.jks
+/android/app/release-keystore.jks
+
+# Flutter obfuscation debug symbols
+/build/symbols/

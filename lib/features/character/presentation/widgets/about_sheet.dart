@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/peak_colors.dart';
 
+const _githubUrl = 'https://github.com/azevedo1x';
+
+Future<void> _openGitHub() async {
+  final uri = Uri.parse(_githubUrl);
+  if (uri.scheme != 'https') return;
+  if (!await canLaunchUrl(uri)) return;
+  await launchUrl(uri, mode: LaunchMode.externalApplication);
+}
+
 class AboutSheet extends StatelessWidget {
   const AboutSheet({super.key});
 
@@ -69,10 +78,7 @@ class _GitHubButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => launchUrl(
-        Uri.parse('https://github.com/azevedo1x'),
-        mode: LaunchMode.externalApplication,
-      ),
+      onTap: _openGitHub,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
