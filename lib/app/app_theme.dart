@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../core/theme/peak_colors.dart';
 
+const String kCharacterFont = 'DarumadropOne';
+
 ThemeData buildAppTheme() => ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
@@ -8,10 +10,6 @@ ThemeData buildAppTheme() => ThemeData(
         brightness: Brightness.dark,
         surface: PeakColors.surface,
       ),
-      fontFamily: 'DarumadropOne',
-      textTheme: ThemeData(brightness: Brightness.dark).textTheme.apply(
-            fontFamily: 'DarumadropOne',
-          ),
       scaffoldBackgroundColor: PeakColors.deepPurple,
       splashFactory: NoSplash.splashFactory,
       highlightColor: Colors.transparent,

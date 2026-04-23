@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../../app/app_theme.dart';
 import '../../../../core/theme/peak_colors.dart';
+import '../../../../core/widgets/glass_panel.dart';
+import '../../../../core/widgets/spring_pressable.dart';
 
 const _githubUrl = 'https://github.com/azevedo1x';
 
@@ -16,90 +19,177 @@ class AboutSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-        color: PeakColors.surface,
-        border: Border(top: kCartoonBorder),
+    return SafeArea(
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        child: GlassPanel(
+          borderRadius: 28,
+          blurSigma: 30,
+          fillAlpha: 0.10,
+          strokeAlpha: 0.22,
+          padding: const EdgeInsets.fromLTRB(24, 14, 24, 28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              _SheetHandle(),
+              SizedBox(height: 22),
+              _SheetIcon(),
+              SizedBox(height: 18),
+              _SheetTitle(),
+              SizedBox(height: 6),
+              _SheetSubtitle(),
+              SizedBox(height: 22),
+              _GitHubButton(),
+              SizedBox(height: 16),
+              _SheetFooter(),
+            ],
+          ),
+        ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 48,
-            height: 5,
-            decoration: BoxDecoration(
-              color: PeakColors.accentCoral,
-              borderRadius: BorderRadius.circular(3),
-            ),
-          ),
-          const SizedBox(height: 20),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              'assets/images/about_icon.jpg',
-              width: 90,
-              height: 90,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Bing Bong',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: PeakColors.textGlow,
-                  shadows: kTextShadows,
-                ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'A Magic 8-Ball inspired by Peak',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: PeakColors.textPrimary.withValues(alpha: 0.7),
-                ),
-          ),
-          const SizedBox(height: 20),
-          _GitHubButton(),
-          const SizedBox(height: 12),
-          Text(
-            'Tap Bing Bong and ask him anything!',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: PeakColors.textPrimary.withValues(alpha: 0.5),
-                ),
+    );
+  }
+}
+
+class _SheetHandle extends StatelessWidget {
+  const _SheetHandle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 42,
+      height: 4,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.35),
+        borderRadius: BorderRadius.circular(2),
+      ),
+    );
+  }
+}
+
+class _SheetIcon extends StatelessWidget {
+  const _SheetIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 96,
+      height: 96,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: PeakColors.accentCoral.withValues(alpha: 0.35),
+            blurRadius: 30,
+            spreadRadius: -6,
+            offset: const Offset(0, 10),
           ),
         ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: Image.asset('assets/images/about_icon.jpg', fit: BoxFit.cover),
+      ),
+    );
+  }
+}
+
+class _SheetTitle extends StatelessWidget {
+  const _SheetTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      'Bing Bong',
+      style: TextStyle(
+        fontFamily: kCharacterFont,
+        fontSize: 30,
+        color: PeakColors.textGlow,
+        shadows: kTextShadows,
+      ),
+    );
+  }
+}
+
+class _SheetSubtitle extends StatelessWidget {
+  const _SheetSubtitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'A Magic 8-Ball inspired by Peak',
+      style: TextStyle(
+        fontSize: 13,
+        letterSpacing: 0.4,
+        color: PeakColors.textMuted.withValues(alpha: 0.9),
+      ),
+    );
+  }
+}
+
+class _SheetFooter extends StatelessWidget {
+  const _SheetFooter();
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Tap Bing Bong and ask him anything.',
+      style: TextStyle(
+        fontSize: 12,
+        letterSpacing: 0.3,
+        color: PeakColors.textMuted.withValues(alpha: 0.6),
       ),
     );
   }
 }
 
 class _GitHubButton extends StatelessWidget {
+  const _GitHubButton();
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return SpringPressable(
       onTap: _openGitHub,
+      pressedScale: 0.92,
+      upDuration: const Duration(milliseconds: 360),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: PeakColors.accentCoral,
-          border: Border.all(color: Colors.black, width: 2),
-          boxShadow: const [
-            BoxShadow(color: Colors.black26, blurRadius: 0, offset: Offset(3, 3)),
+          borderRadius: BorderRadius.circular(16),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              PeakColors.accentCoral,
+              PeakColors.accentCoral.withValues(alpha: 0.82),
+            ],
+          ),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: 0.22),
+            width: 1,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: PeakColors.accentCoral.withValues(alpha: 0.45),
+              blurRadius: 22,
+              spreadRadius: -4,
+              offset: const Offset(0, 8),
+            ),
           ],
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.code_rounded, size: 18, color: Colors.white),
-            const SizedBox(width: 8),
+            Icon(Icons.code_rounded, size: 18, color: Colors.white),
+            SizedBox(width: 10),
             Text(
               '@azevedo1x',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: Colors.white,
-                    letterSpacing: 0.5,
-                  ),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.6,
+              ),
             ),
           ],
         ),

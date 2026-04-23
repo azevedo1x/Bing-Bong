@@ -1,10 +1,16 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../logic/character_notifier.dart';
+import 'shockwave.dart';
 
 class BingBongWidget extends ConsumerStatefulWidget {
-  const BingBongWidget({super.key});
+  final ShockwaveController? shockwave;
+
+  const BingBongWidget({super.key, this.shockwave});
 
   @override
   ConsumerState<BingBongWidget> createState() => _BingBongWidgetState();
@@ -12,59 +18,110 @@ class BingBongWidget extends ConsumerStatefulWidget {
 
 class _BingBongWidgetState extends ConsumerState<BingBongWidget>
     with TickerProviderStateMixin {
-  late final AnimationController _idleController;
+  static const double _imageSize = 280;
+
+  late final AnimationController _floatController;
+  late final AnimationController _breathController;
   late final AnimationController _bounceController;
+  late final AnimationController _wobbleController;
+
   late final Animation<double> _floatAnim;
-  late final Animation<double> _scaleAnim;
+  late final Animation<double> _breathAnim;
+  late final Animation<double> _scaleY;
+  late final Animation<double> _scaleX;
 
   @override
   void initState() {
     super.initState();
 
-    _idleController = AnimationController(
+    _floatController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2200),
+      duration: const Duration(milliseconds: 2600),
     )..repeat(reverse: true);
 
-    _floatAnim = Tween<double>(begin: -10, end: 10).animate(
-      CurvedAnimation(parent: _idleController, curve: Curves.easeInOut),
+    _floatAnim = Tween<double>(begin: -8, end: 8).animate(
+      CurvedAnimation(parent: _floatController, curve: Curves.easeInOut),
+    );
+
+    _breathController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3400),
+    )..repeat(reverse: true);
+
+    _breathAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _breathController, curve: Curves.easeInOut),
     );
 
     _bounceController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 380),
+      duration: const Duration(milliseconds: 560),
     );
 
-    _scaleAnim = TweenSequence<double>([
+    _scaleY = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween(begin: 1.0, end: 1.18)
+        tween: Tween(begin: 1.0, end: 0.88)
             .chain(CurveTween(curve: Curves.easeOut)),
-        weight: 40,
+        weight: 14,
       ),
       TweenSequenceItem(
-        tween: Tween(begin: 1.18, end: 0.94)
-            .chain(CurveTween(curve: Curves.easeIn)),
-        weight: 30,
+        tween: Tween(begin: 0.88, end: 1.20)
+            .chain(CurveTween(curve: Curves.easeOutCubic)),
+        weight: 22,
       ),
       TweenSequenceItem(
-        tween: Tween(begin: 0.94, end: 1.0)
+        tween: Tween(begin: 1.20, end: 1.0)
             .chain(CurveTween(curve: Curves.elasticOut)),
-        weight: 30,
+        weight: 64,
       ),
     ]).animate(_bounceController);
+
+    _scaleX = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween(begin: 1.0, end: 1.10)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 14,
+      ),
+      TweenSequenceItem(
+        tween: Tween(begin: 1.10, end: 0.86)
+            .chain(CurveTween(curve: Curves.easeOutCubic)),
+        weight: 22,
+      ),
+      TweenSequenceItem(
+        tween: Tween(begin: 0.86, end: 1.0)
+            .chain(CurveTween(curve: Curves.elasticOut)),
+        weight: 64,
+      ),
+    ]).animate(_bounceController);
+
+    _wobbleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    );
   }
 
   @override
   void dispose() {
-    _idleController.dispose();
+    _floatController.dispose();
+    _breathController.dispose();
     _bounceController.dispose();
+    _wobbleController.dispose();
     super.dispose();
   }
 
   Future<void> _onTap() async {
     HapticFeedback.mediumImpact();
-    _bounceController.forward(from: 0.0);
+    widget.shockwave?.pulse();
+
+    _bounceController.forward(from: 0);
+    _wobbleController.forward(from: 0);
+
     await ref.read(characterProvider.notifier).onTap();
+  }
+
+  double _wobbleRad(double w) {
+    if (w == 0) return 0;
+    final decay = math.pow(1 - w, 1.8).toDouble();
+    return math.sin(w * math.pi * 3.0) * 0.045 * decay;
   }
 
   @override
@@ -73,14 +130,36 @@ class _BingBongWidgetState extends ConsumerState<BingBongWidget>
       onTap: _onTap,
       behavior: HitTestBehavior.opaque,
       child: AnimatedBuilder(
-        animation: Listenable.merge([_idleController, _bounceController]),
-        builder: (context, child) => Transform.translate(
-          offset: Offset(0, _floatAnim.value),
-          child: Transform.scale(scale: _scaleAnim.value, child: child),
-        ),
+        animation: Listenable.merge([
+          _floatController,
+          _breathController,
+          _bounceController,
+          _wobbleController,
+        ]),
+        builder: (context, child) {
+          final breathT = _breathAnim.value;
+          final breathY = 1.0 + breathT * 0.018;
+          final breathX = 1.0 - breathT * 0.012;
+
+          final sy = _scaleY.value * breathY;
+          final sx = _scaleX.value * breathX;
+
+          return Transform.translate(
+            offset: Offset(0, _floatAnim.value),
+            child: Transform.rotate(
+              angle: _wobbleRad(_wobbleController.value),
+              child: Transform.scale(
+                scaleX: sx,
+                scaleY: sy,
+                alignment: Alignment.bottomCenter,
+                child: child,
+              ),
+            ),
+          );
+        },
         child: Image.asset(
           'assets/images/bing_bong.png',
-          width: 280,
+          width: _imageSize,
           fit: BoxFit.contain,
         ),
       ),

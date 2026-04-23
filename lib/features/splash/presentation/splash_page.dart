@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../core/theme/peak_colors.dart';
 import '../../character/presentation/character_page.dart';
 
@@ -60,19 +61,46 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: PeakColors.deepPurple,
-      body: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) => Opacity(
-          opacity: _fadeIn.value * _fadeOut.value,
-          child: child,
-        ),
-        child: Image.asset(
-          'assets/images/bing-bong-app-opening.jpg',
-          fit: BoxFit.contain,
-          width: double.infinity,
-          height: double.infinity,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
+        backgroundColor: PeakColors.deepPurple,
+        body: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) => Opacity(
+            opacity: _fadeIn.value * _fadeOut.value,
+            child: child,
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                'assets/images/bing-bong-app-opening.jpg',
+                fit: BoxFit.contain,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+              IgnorePointer(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: RadialGradient(
+                      center: Alignment.center,
+                      radius: 1.0,
+                      colors: [
+                        Colors.transparent,
+                        PeakColors.deepPurple.withValues(alpha: 0.5),
+                        PeakColors.vignetteEdge.withValues(alpha: 0.85),
+                      ],
+                      stops: const [0.55, 0.85, 1.0],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
