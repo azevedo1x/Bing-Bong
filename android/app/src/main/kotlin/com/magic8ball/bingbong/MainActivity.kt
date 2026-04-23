@@ -1,4 +1,4 @@
-package com.bingbong.bingbong
+package com.magic8ball.bingbong
 
 import io.flutter.embedding.android.FlutterActivity
 
