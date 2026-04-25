@@ -60,8 +60,6 @@ class _AmbientGlowState extends State<AmbientGlow>
       animation: Listenable.merge([_breath, _activeAnim]),
       builder: (context, child) {
         final activeT = _activeAnim.value;
-        if (activeT == 0) return child!;
-
         final breathT = Curves.easeInOut.transform(_breath.value);
         final blur = (60 + 40 * breathT) * activeT;
         final spread = (12 + 16 * breathT) * activeT;
@@ -73,18 +71,20 @@ class _AmbientGlowState extends State<AmbientGlow>
         return DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: PeakColors.talkGlow.withValues(alpha: warmAlpha),
-                blurRadius: blur,
-                spreadRadius: spread,
-              ),
-              BoxShadow(
-                color: PeakColors.idleGlow.withValues(alpha: coolAlpha),
-                blurRadius: blur * 0.7,
-                spreadRadius: spread * 0.55,
-              ),
-            ],
+            boxShadow: activeT == 0
+                ? null
+                : [
+                    BoxShadow(
+                      color: PeakColors.talkGlow.withValues(alpha: warmAlpha),
+                      blurRadius: blur,
+                      spreadRadius: spread,
+                    ),
+                    BoxShadow(
+                      color: PeakColors.idleGlow.withValues(alpha: coolAlpha),
+                      blurRadius: blur * 0.7,
+                      spreadRadius: spread * 0.55,
+                    ),
+                  ],
           ),
           child: child,
         );
