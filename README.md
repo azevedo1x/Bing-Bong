@@ -134,19 +134,8 @@ flutter build apk
 
 ## Voice Lines
 
-All 26 responses, extracted straight from BingBong Airlines' finest:
-
-| | | |
-|---|---|---|
-| definitely not | dont do it | i dunno |
-| i guess so | i miss my wife | i think its fine |
-| i think thats a bad idea | if i say yes will you take me with you? | if you wanna |
-| im bing bong | im not comfortable answering that | im not sure |
-| maybe | nahhh | no no no no no |
-| no | noooooooooo | nuh uh |
-| ok | please don't | sure |
-| uh yeah | uhhhhhh | yeah definitely |
-| yes | you should ask your friends for help | |
+Voice line .mp3 files are not included in this repository. To run the app locally, place 26 .mp3 files in `assets/audio/`. Filenames become the displayed quote text; underscores in filenames are rendered as apostrophes
+(e.g. `It_s a beautiful day.mp3` → `It's a beautiful day`).
 
 ## About PEAK
 
