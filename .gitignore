@@ -56,3 +56,6 @@ CLAUDE.md
 
 # Flutter obfuscation debug symbols
 /build/symbols/
+
+# Audio assets — not redistributed; provide your own .mp3 files in assets/audio/
+assets/audio/*.mp3
