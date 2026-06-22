@@ -46,10 +46,11 @@ For a brief time after PEAK's launch, the developers at Aggro Crab could actuall
 ## Features
 
 - **26 authentic voice lines**: all the classic Bing Bong responses, from *"yeah definitely"* to *"im not comfortable answering that"*
-- **Real-time 3D Bing Bong**: a fully 3D model rendered with the Filament engine (via `thermion_flutter`) — you squeeze the actual model, not a flat sprite
+- **Real-time 3D Bing Bong**: a fully 3D model rendered with the Filament engine (via `thermion_flutter`), you squeeze the actual model, not a flat sprite
+- **Drag to inspect in 3D**: drag the character to orbit him freely, see his back, his feet, every angle; release and he eases back to facing you
 - **Shuffle-bag randomization**: every voice line plays before any repeats, never the same line twice in a row
 - **Premium gamified physics**: squash & stretch on tap (non-uniform scale), rotational wobble, spring-elastic button press
-- **Shockwave ripple emit**: tapping Bing Bong sends an expanding ring outward — emitted from the character on every voice line trigger
+- **Shockwave ripple emit**: tapping Bing Bong sends an expanding ring outward, emitted from the character on every voice line trigger
 - **Dual-tone breathing halo**: warm yellow + lime green aura that pulses (blur + spread oscillating) while speaking
 - **"I'm Bing Bong" button**: dedicated button to hear his iconic catchphrase anytime
 - **Live quote display**: Bing Bong's response fades and slides in centered on screen as he speaks
@@ -99,7 +100,7 @@ lib/
 │   │           ├── about_sheet.dart           # Glass bottom sheet + GitHub link
 │   │           ├── ambient_glow.dart          # Breathing dual-tone halo (warm + cool)
 │   │           ├── background.dart            # Blurred bg + vignette + spotlight + light leaks
-│   │           ├── bing_bong_widget.dart      # 3D GLB model (Thermion/Filament) + squash & stretch + wobble + ripple emit
+│   │           ├── bing_bong_widget.dart      # 3D GLB model (Thermion/Filament) + squash & stretch + wobble + ripple emit + drag-to-orbit
 │   │           ├── glass_icon_button.dart     # Reusable glass tile w/ spring press
 │   │           ├── glass_quote_card.dart      # Glassmorphism quote card
 │   │           ├── im_bing_bong_button.dart   # Specialized GlassIconButton (catchphrase)
